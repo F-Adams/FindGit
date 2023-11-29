@@ -13,8 +13,6 @@ thead,
 }
 
 body {
-    /* background: #131d2f; */
-    /* color: white; */
     display: flex;
     align-items: center;
     flex-direction: column;

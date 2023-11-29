@@ -40,7 +40,6 @@ let perPage = 30;
 if (currentPage === null) {
     currentPage = 1;
 }
-logInfo(`Current page: ${currentPage}`);
 
 // If no username was submitted, Show an error, otherwise query the API
 if (gitUser === '') {
@@ -51,7 +50,6 @@ if (gitUser === '') {
 
 async function getData(gitUser, currentPage) {
     let start = Date.now();
-    logInfo('Starting request...', true);
 
     // Base URL for API call
     const baseURL = 'https://api.github.com/users';
@@ -62,37 +60,29 @@ async function getData(gitUser, currentPage) {
 
     if (pageQuery.message === 'Not Found') {
         displayError('Username was not found.');
-        alert(pageQuery.message);
     } else {
 
         let numRepos = pageQuery.public_repos;
-        logInfo(`Number of Repos: ${pageQuery.public_repos}`);
 
         // Calculate how many pages are needed to show all repos
         const numPages = Math.ceil(numRepos / perPage);
-        logInfo(`Number of pages: ${numPages}`);
 
         // Build the paging links
         currentPage = parseInt(currentPage);
-        logInfo(`Current page: ${currentPage}`);
         let nextLink = '';
         let prevLink = '';
 
         if (currentPage < numPages) {
             let nextPage = currentPage + 1;
             nextLink = `search.html?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
-            logInfo(`Next page: ${nextLink}`);
         }
         if (currentPage > 1) {
             let previousPage = currentPage - 1;
             prevLink = `search.html?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
-            logInfo(`Previous page: ${prevLink}`);
         }
 
         // Get the list of public repos for the specified user
         const searchResults = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
-        logInfo(`Sending query to ${searchResults}`);
-
         const response = await fetch(searchResults);
         const gitQuery = await response.json();
         let timeTaken = Date.now() - start;
@@ -221,10 +211,4 @@ function showOutput(result, howLong, nextPage, prevPage) {
         const noLink = document.createElement('span');
         pagingDiv.appendChild(noLink);
     }
-
-    // Log some information the the console
-    logInfo(`Total time taken: ${howLong} milliseconds for ${numRepos} repos for GitHub user: ${gitUser}`);
-
-    // All generated HTML is output to the console, for QA purposes
-    logInfo(tbl);
 };

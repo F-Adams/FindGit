@@ -14,11 +14,12 @@
     <body>
 
         <header>
-            <h1 class="title">FindGit: List User Repositories</h1>
+            <h1>FindGit: List User Repositories</h1>
         </header>
 
         <main class="container">
-            <form class="searchForm" action="search.html" method="GET" class="searchForm" id="searchForm">
+            <form autocomplete="off" class="searchForm" action="search.html" method="GET" class="searchForm"
+                id="searchForm">
                 <input type="text" class="searchBox" name="gitUser" id="gitUser" placeholder="GitHub Username">
                 <button type="submit" class="searchButton" id="searchButton">Search!</button>
             </form>

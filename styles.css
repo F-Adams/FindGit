@@ -51,6 +51,7 @@ body {
     border: none;
     border-radius: 8px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .resultTable {
@@ -125,4 +126,14 @@ tr:nth-of-type(even) {
     text-align: center;
 }
 
-.backButton {}
+.backButton {
+    margin: 25px auto;
+    background-color: #ff8000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    align-self: center;
+    cursor: pointer;
+}

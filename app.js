@@ -26,7 +26,8 @@ logInfo(`Current page: ${currentPage}`);
 
 // If no username was submitted, Show an error, otherwise query the API
 if (gitUser === '') {
-    logInfo('There was an error! No username was specified.');
+    displayError('No username was specified.');
+    alert('There was an error! No username was specified.');
 } else {
     getData(gitUser, currentPage);
 };
@@ -43,43 +44,44 @@ async function getData(gitUser, currentPage) {
     const pageQuery = await userProfile.json();
 
     if (pageQuery.message === 'Not Found') {
-        displayError('404');
+        displayError('Username was not found.');
         alert(pageQuery.message);
-    }
+    } else {
 
-    let numRepos = pageQuery.public_repos;
-    logInfo(`Number of Repos: ${pageQuery.public_repos}`);
+        let numRepos = pageQuery.public_repos;
+        logInfo(`Number of Repos: ${pageQuery.public_repos}`);
 
-    // Calculate how many pages are needed to show all repos
-    const numPages = Math.ceil(numRepos / perPage);
-    logInfo(`Number of pages: ${numPages}`);
+        // Calculate how many pages are needed to show all repos
+        const numPages = Math.ceil(numRepos / perPage);
+        logInfo(`Number of pages: ${numPages}`);
 
-    // Build the paging links
-    currentPage = parseInt(currentPage);
-    logInfo(`Current page: ${currentPage}`);
-    let nextLink = '';
-    let prevLink = '';
+        // Build the paging links
+        currentPage = parseInt(currentPage);
+        logInfo(`Current page: ${currentPage}`);
+        let nextLink = '';
+        let prevLink = '';
 
-    if (currentPage < numPages) {
-        let nextPage = currentPage + 1;
-        nextLink = `search.html?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
-        logInfo(`Next page: ${nextLink}`);
-    }
-    if (currentPage > 1) {
-        let previousPage = currentPage - 1;
-        prevLink = `search.html?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
-        logInfo(`Previous page: ${prevLink}`);
-    }
+        if (currentPage < numPages) {
+            let nextPage = currentPage + 1;
+            nextLink = `search.html?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
+            logInfo(`Next page: ${nextLink}`);
+        }
+        if (currentPage > 1) {
+            let previousPage = currentPage - 1;
+            prevLink = `search.html?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
+            logInfo(`Previous page: ${prevLink}`);
+        }
 
-    // Get the list of public repos for the specified user
-    const searchResults = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
-    logInfo(`Sending query to ${searchResults}`);
+        // Get the list of public repos for the specified user
+        const searchResults = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
+        logInfo(`Sending query to ${searchResults}`);
 
-    const response = await fetch(searchResults);
-    const gitQuery = await response.json();
-    let timeTaken = Date.now() - start;
+        const response = await fetch(searchResults);
+        const gitQuery = await response.json();
+        let timeTaken = Date.now() - start;
 
-    showOutput(gitQuery, timeTaken, nextLink, prevLink);
+        showOutput(gitQuery, timeTaken, nextLink, prevLink);
+    };
 };
 
 //Build the output table

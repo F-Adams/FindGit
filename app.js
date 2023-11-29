@@ -1,18 +1,8 @@
-// A function that simply writes information to the console.
-function logInfo(info, clearConsole = false) {
-    if (info !== '') {
-        if (clearConsole === true) {
-            console.clear();
-        };
-        console.log(info);
-    };
-};
-
+// A fucntion to display an error to the user
 function displayError(errorCode) {
-    logInfo('There was an error! ' + errorCode);
     const outputDiv = document.getElementById('resultTable');
     const errorDiv = document.createElement('div');
-    const errorText = document.createTextNode(`And error was encountered: ${errorCode}`);
+    const errorText = document.createTextNode(`There was an error: ${errorCode}`);
     const backButton = document.createElement('a');
     const backText = document.createTextNode('Go Back');
 
@@ -30,6 +20,18 @@ function displayError(errorCode) {
     });
 };
 
+function validName(gitName) {
+    const pattern = /^[A-Za-z0-9-]+$/;
+
+    if (pattern.test(gitName)) {
+        // Input is valid
+        return true;
+    } else {
+        // Input is invalid
+        return false;
+    }
+}
+
 // Get the search term from the querystring
 let searchTerm = new URLSearchParams(document.location.search);
 let gitUser = searchTerm.get('gitUser');
@@ -41,11 +43,11 @@ if (currentPage === null) {
     currentPage = 1;
 }
 
-// If no username was submitted, Show an error, otherwise query the API
-if (gitUser === '') {
-    displayError('No username was specified.');
-} else {
+// If no username or an ivalid name was submitted, Show an error, otherwise query the API
+if (gitUser !== '' && validName(gitUser)) {
     getData(gitUser, currentPage);
+} else {
+    displayError('Invalid Username or no username was specified.');
 };
 
 async function getData(gitUser, currentPage) {

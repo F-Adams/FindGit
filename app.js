@@ -10,6 +10,24 @@ function logInfo(info, clearConsole = false) {
 
 function displayError(errorCode) {
     logInfo('There was an error! ' + errorCode);
+    const outputDiv = document.getElementById('resultTable');
+    const errorDiv = document.createElement('div');
+    const errorText = document.createTextNode(`And error was encountered: ${errorCode}`);
+    const backButton = document.createElement('a');
+    const backText = document.createTextNode('Go Back');
+
+    errorDiv.classList.add('errorMessage');
+    errorDiv.appendChild(errorText);
+    outputDiv.appendChild(errorDiv);
+    backButton.classList.add('backButton');
+    backButton.appendChild(backText);
+    errorDiv.appendChild(backButton);
+
+    backButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        window.history.back();
+    });
 };
 
 // Get the search term from the querystring
@@ -27,7 +45,6 @@ logInfo(`Current page: ${currentPage}`);
 // If no username was submitted, Show an error, otherwise query the API
 if (gitUser === '') {
     displayError('No username was specified.');
-    alert('There was an error! No username was specified.');
 } else {
     getData(gitUser, currentPage);
 };

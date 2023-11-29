@@ -111,3 +111,18 @@ tr:nth-of-type(even) {
 .bottom {
     padding: 20px;
 }
+
+.errorMessage {
+    border: 1px solid;
+    margin: 25px;
+    padding: 25px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #D8000C;
+    background-color: #FFBABA;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.backButton {}

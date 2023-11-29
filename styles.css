@@ -25,12 +25,14 @@ body {
 }
 
 .searchForm {
+    margin: auto;
     background: #ddd;
     padding: 10px 10px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 30vw;
 }
 
 .searchForm input {

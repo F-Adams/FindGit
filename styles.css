@@ -87,12 +87,27 @@ tr:nth-of-type(even) {
 }
 
 .pagingDiv {
-    width: 75vw;
+    margin: auto;
+    width: 35vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.previous {
-    text-align: right;
+.pagingDiv a {
+    background-color: #ff8000;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    width: 8rem;
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    min-width: 6rem;
+}
+
+.bottom {
+    padding: 20px;
 }

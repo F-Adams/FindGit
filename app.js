@@ -16,7 +16,7 @@ function displayError(errorCode) {
 let searchTerm = new URLSearchParams(document.location.search);
 let gitUser = searchTerm.get('gitUser');
 let currentPage = searchTerm.get('page');
-let perPage = 50;
+let perPage = 30;
 
 // If no page is specified, start at page 1
 if (currentPage === null) {
@@ -181,22 +181,26 @@ function showOutput(result, howLong, nextPage, prevPage) {
 
     if (prevPage !== '') {
         const prevPageLink = document.createElement('a');
-        const hyperLink = document.createTextNode('< Previous Page');
+        const hyperLink = document.createTextNode('< Previous');
         prevPageLink.appendChild(hyperLink);
-        prevPageLink.title = '< Previous Page';
+        prevPageLink.title = '< Previous';
         prevPageLink.href = prevPage;
-        prevPageLink.classList.add('previous');
         pagingDiv.appendChild(prevPageLink);
+    } else {
+        const noLink = document.createElement('span');
+        pagingDiv.appendChild(noLink);
     }
 
     if (nextPage !== '') {
         const nextPageLink = document.createElement('a');
-        const hyperLink = document.createTextNode('Next Page >');
+        const hyperLink = document.createTextNode('Next >');
         nextPageLink.appendChild(hyperLink);
-        nextPageLink.title = 'Next Page >';
+        nextPageLink.title = 'Next >';
         nextPageLink.href = nextPage;
-        nextPageLink.classList.add('next');
         pagingDiv.appendChild(nextPageLink);
+    } else {
+        const noLink = document.createElement('span');
+        pagingDiv.appendChild(noLink);
     }
 
     // Log some information the the console

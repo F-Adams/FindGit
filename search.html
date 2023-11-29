@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>List Public GitHub repositories</title>
+        <meta name="description" content="A simnple API call to list a user's public repositories on GitHub">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>GitHub API: List Public Repositories</h1>
+        </header>
+
+        <main>
+            <section id="resultTable">
+
+            </section>
+        </main>
+
+        <footer>
+            <p class="bottom">
+                <a href="https://docs.github.com/en/rest?apiVersion=2022-11-28" target="_blank">GitHub API v22-11-28</a>
+            </p>
+        </footer>
+
+        <script defer src="app.js"></script>
+    </body>
+
+</html>
+
+<script>
+
+    let params = new URLSearchParams(document.location.search);
+    let name = params.get('gitUser'); // is the string "Jonathan";
+
+    alert(name);
+</script>

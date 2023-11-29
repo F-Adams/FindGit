@@ -85,3 +85,14 @@ tr:nth-of-type(even) {
     font-weight: bold;
     text-align: right;
 }
+
+.pagingDiv {
+    width: 75vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.previous {
+    text-align: right;
+}

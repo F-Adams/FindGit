@@ -57,15 +57,17 @@ async function getData(gitUser, currentPage) {
     // Build the paging links
     currentPage = parseInt(currentPage);
     logInfo(`Current page: ${currentPage}`);
+    let nextLink = '';
+    let prevLink = '';
 
     if (currentPage < numPages) {
         let nextPage = currentPage + 1;
-        let nextLink = `search.html/?page=${nextPage}&per_page=${perPage}`;
+        nextLink = `search.html?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
         logInfo(`Next page: ${nextLink}`);
     }
     if (currentPage > 1) {
         let previousPage = currentPage - 1;
-        let prevLink = `search.html?page=${previousPage}&per_page=${perPage}`;
+        prevLink = `search.html?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
         logInfo(`Previous page: ${prevLink}`);
     }
 
@@ -77,11 +79,11 @@ async function getData(gitUser, currentPage) {
     const gitQuery = await response.json();
     let timeTaken = Date.now() - start;
 
-    showOutput(gitQuery, timeTaken, currentPage, numPages);
+    showOutput(gitQuery, timeTaken, nextLink, prevLink);
 };
 
 //Build the output table
-function showOutput(result, howLong, thisPage, lastPage) {
+function showOutput(result, howLong, nextPage, prevPage) {
 
     // Get the SECTION element, and clear it of any previously generated HTML
     const resultSection = document.getElementById('resultTable');
@@ -173,10 +175,33 @@ function showOutput(result, howLong, thisPage, lastPage) {
     tbl.appendChild(tblFooter);
 
     // Write the paging links
-    const pagingLinks = document.createElement('div');
-    pagingLinks.classList.add
+    const pagingDiv = document.createElement('div');
+    pagingDiv.classList.add('pagingDiv');
+    resultSection.appendChild(pagingDiv);
+
+    if (prevPage !== '') {
+        const prevPageLink = document.createElement('a');
+        const hyperLink = document.createTextNode('< Previous Page');
+        prevPageLink.appendChild(hyperLink);
+        prevPageLink.title = '< Previous Page';
+        prevPageLink.href = prevPage;
+        prevPageLink.classList.add('previous');
+        pagingDiv.appendChild(prevPageLink);
+    }
+
+    if (nextPage !== '') {
+        const nextPageLink = document.createElement('a');
+        const hyperLink = document.createTextNode('Next Page >');
+        nextPageLink.appendChild(hyperLink);
+        nextPageLink.title = 'Next Page >';
+        nextPageLink.href = nextPage;
+        nextPageLink.classList.add('next');
+        pagingDiv.appendChild(nextPageLink);
+    }
 
     // Log some information the the console
     logInfo(`Total time taken: ${howLong} milliseconds for ${numRepos} repos for GitHub user: ${gitUser}`);
-    logInfo(tbl);                                               // All generated HTML is output to the console, for QA purposes
+
+    // All generated HTML is output to the console, for QA purposes
+    logInfo(tbl);
 };

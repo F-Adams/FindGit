@@ -18,40 +18,116 @@ body {
     flex-direction: column;
 }
 
-.header {
+.pageHeader {
+    background-color: #eee;
     display: flex;
-    align-items: flex-end;
-    /* justify-content: center; */
-}
-
-.searchForm {
-    margin: auto;
-    background: #ddd;
-    padding: 10px 10px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    width: 30vw;
+    width: 100vw;
 }
 
-.searchForm input {
-    background-color: transparent;
-    border: none;
-    width: 80%;
-    outline: none;
-    color: #000;
-    font-size: 15px;
+.pageHeader img {
+    width: 135px;
+    height: 28px;
+    margin: 5px;
 }
 
-.searchForm button {
-    background-color: #ff8000;
-    color: #ffffff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 8px;
+.pageHeader a {
+    color: #3f51b5;
+    text-transform: uppercase;
+    padding: 10px;
     font-weight: 700;
-    cursor: pointer;
+    text-decoration: none;
+}
+
+.pageHeader a:hover {
+    color: #fff;
+    background-color: #ff8000;
+}
+
+.pageFooter {
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+}
+
+.pageFooter a {
+    color: #3f51b5;
+    text-transform: uppercase;
+    padding: 15px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.pageFooter a:hover {
+    color: #fff;
+    background-color: #ff8000;
+}
+
+.siteBrand {
+    height: 48px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.copyright {
+    color: #3f51b5;
+    text-transform: uppercase;
+    padding: 15px;
+    font-weight: 700;
+}
+
+.search-wrapper {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-logo img {
+    width: 400px;
+}
+
+.search-bar {
+    margin: 30px 0;
+    position: relative;
+    width: 100%;
+}
+
+.search-bar input {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #d0d0d0;
+    border-radius: 100px;
+    padding: 0 50px;
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(136, 136, 136, 0);
+    font-size: 18px;
+    transition: box-shadow .3s;
+}
+
+.search-bar input:focus {
+    box-shadow: 0 0 10px -4px #888888;
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    display: flex;
+    font-size: 20px;
+    color: #888888;
+}
+
+.search-bar .search-icon.right {
+    right: 0;
 }
 
 .resultTable {
@@ -107,10 +183,6 @@ tr:nth-of-type(even) {
     text-align: center;
     text-decoration: none;
     min-width: 6rem;
-}
-
-.bottom {
-    padding: 20px;
 }
 
 .errorMessage {

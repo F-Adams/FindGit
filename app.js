@@ -32,22 +32,52 @@ function validName(gitName) {
     }
 }
 
-// Get the search term from the querystring
-let searchTerm = new URLSearchParams(document.location.search);
-let gitUser = searchTerm.get('gitUser');
-let currentPage = searchTerm.get('page');
+// Add event listeners to the form buttons
+const searchButton = document.getElementById('searchButton');
+const luckyButton = document.getElementById('luckyButton');
+
+searchButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    // Get the user-supplied search term from the input box
+    let inputField = document.getElementById('gitUser');
+    gitUser = inputField.value;
+    currentPage = 1;
+
+    if (gitUser !== '' && validName(gitUser)) {
+        getData(gitUser, currentPage);
+    } else {
+        alert('Invalid Username or no username was specified.');
+    };
+
+    inputField.value = '';
+});
+
+luckyButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    // Pick a random GitHub user from a predefined array
+    let randomNames = ['Amzn', 'Apple', 'AWS', 'Facebook', 'GitHub', 'Google', 'Microsoft', 'Twitter', 'YouTube'];
+    let imFeelingLucky = Math.floor(Math.random() * randomNames.length);
+    gitUser = randomNames[imFeelingLucky];
+    currentPage = 1;
+    getData(gitUser, currentPage);
+});
+
+// Get information that is passed through the quesrysting
+let queryString = new URLSearchParams(document.location.search);
+let currentPage = queryString.get('page');
+let gitUser = queryString.get('gitUser');
 let perPage = 30;
+let thisPage = 'index.html';
 
 // If no page is specified, start at page 1
 if (currentPage === null) {
     currentPage = 1;
 }
 
-// If no username or an ivalid name was submitted, Show an error, otherwise query the API
 if (gitUser !== '' && validName(gitUser)) {
     getData(gitUser, currentPage);
 } else {
-    displayError('Invalid Username or no username was specified.');
+    alert('Invalid Username or no username was specified.');
 };
 
 async function getData(gitUser, currentPage) {
@@ -76,11 +106,11 @@ async function getData(gitUser, currentPage) {
 
         if (currentPage < numPages) {
             let nextPage = currentPage + 1;
-            nextLink = `search.html?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
+            nextLink = `${thisPage}?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
         }
         if (currentPage > 1) {
             let previousPage = currentPage - 1;
-            prevLink = `search.html?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
+            prevLink = `${thisPage}?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
         }
 
         // Get the list of public repos for the specified user

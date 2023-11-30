@@ -142,14 +142,14 @@ body {
 
 .resultTable {
     border-collapse: collapse;
-    width: 75vw;
+    width: 70vw;
     margin: 1.5em auto;
 }
 
 th,
 td {
     border: 1px solid #000;
-    padding: 5px 15px;
+    padding: 5px 10px;
 }
 
 thead,
@@ -175,7 +175,7 @@ tr:nth-of-type(even) {
 
 .pagingDiv {
     margin: auto;
-    width: 35vw;
+    /* width: 35vw; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -186,13 +186,13 @@ tr:nth-of-type(even) {
     color: #ffffff;
     text-transform: uppercase;
     padding: 5px 10px;
-    width: 8rem;
+    /* width: 8rem; */
     border: 1px solid #000;
     border-radius: 8px;
     font-weight: 700;
     text-align: center;
     text-decoration: none;
-    min-width: 6rem;
+    /* min-width: 6rem; */
 }
 
 .errorMessage {

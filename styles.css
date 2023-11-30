@@ -93,12 +93,12 @@ body {
     align-items: center;
 }
 
-.search-bar {
+.searchBox {
     margin: 30px 0;
     width: 100%;
 }
 
-.search-bar input {
+.searchBox input {
     height: 50px;
     width: 100%;
     border: 1px solid #d0d0d0;
@@ -110,8 +110,32 @@ body {
     transition: box-shadow .3s;
 }
 
-.search-bar input:focus {
+.searchBox input:focus {
     box-shadow: 0 0 10px -4px #888888;
+}
+
+.searchButtons {
+    display: flex;
+    margin-bottom: 30px;
+    border-radius: 25px;
+}
+
+.searchButtons a {
+    text-decoration: none;
+    margin-right: 15px;
+    background-color: #ececec;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.searchButtons a:last-child {
+    margin-right: 0;
+}
+
+.searchButtons a:hover {
+    border: 1px solid #8c8c8c;
 }
 
 .resultTable {

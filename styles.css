@@ -18,6 +18,12 @@ body {
     flex-direction: column;
 }
 
+.header {
+    display: flex;
+    align-items: flex-end;
+    /* justify-content: center; */
+}
+
 .searchForm {
     margin: auto;
     background: #ddd;

@@ -1,3 +1,5 @@
 # FindGit
 
-A simple application to list all public repositories for a specified Github user.
+This is a simple application to list all public repositories for a specified Github user.
+
+

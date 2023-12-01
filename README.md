@@ -5,4 +5,6 @@ This is not a Google search page! Instead, it simply utilizes the GitHub API to 
 regular expression to ensure that the entered search term conforms to current GitHub username format. In this case, alphanumeric characters and a dash are the only allowerd characters
 in a GitHub username, and the RegEx pattern is 
 
+This application was developed as my final Capstone project for the Code: You Web Development pathway.
 
+## Project Requirements

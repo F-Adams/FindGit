@@ -32,6 +32,19 @@ function validName(gitName) {
     }
 }
 
+// Get information that is passed through the quesrysting, only if the form wasn't submitted
+let queryString = new URLSearchParams(document.location.search);
+let qs = queryString.get('qs');
+
+if (qs) {
+    currentPage = queryString.get('page');
+    gitUser = queryString.get('gitUser');
+    qs = false;
+};
+
+let perPage = 30;
+let thisPage = 'index.html';
+
 // Add event listeners to the form buttons
 const searchButton = document.getElementById('searchButton');
 const luckyButton = document.getElementById('luckyButton');
@@ -54,6 +67,7 @@ searchButton.addEventListener('click', function (e) {
 
 luckyButton.addEventListener('click', function (e) {
     e.preventDefault();
+
     // Pick a random GitHub user from a predefined array
     let randomNames = ['Amzn', 'Apple', 'AWS', 'Facebook', 'GitHub', 'Google', 'Microsoft', 'Twitter', 'YouTube'];
     let imFeelingLucky = Math.floor(Math.random() * randomNames.length);
@@ -61,13 +75,6 @@ luckyButton.addEventListener('click', function (e) {
     currentPage = 1;
     getData(gitUser, currentPage);
 });
-
-// Get information that is passed through the quesrysting
-let queryString = new URLSearchParams(document.location.search);
-let currentPage = queryString.get('page');
-let gitUser = queryString.get('gitUser');
-let perPage = 30;
-let thisPage = 'index.html';
 
 // If no page is specified, start at page 1
 if (currentPage === null) {
@@ -91,7 +98,7 @@ async function getData(gitUser, currentPage) {
     const pageQuery = await userProfile.json();
 
     if (pageQuery.message === 'Not Found') {
-        displayError('Username was not found.');
+        alert('That username was not found.');
     } else {
 
         let numRepos = pageQuery.public_repos;
@@ -104,13 +111,16 @@ async function getData(gitUser, currentPage) {
         let nextLink = '';
         let prevLink = '';
 
+        firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+        lastPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+
         if (currentPage < numPages) {
             let nextPage = currentPage + 1;
-            nextLink = `${thisPage}?gitUser=${gitUser}&page=${nextPage}&per_page=${perPage}`;
+            nextLink = `${thisPage}?gitUser=${gitUser}&page=${nextPage}&qs=true`;
         }
         if (currentPage > 1) {
             let previousPage = currentPage - 1;
-            prevLink = `${thisPage}?gitUser=${gitUser}&page=${previousPage}&per_page=${perPage}`;
+            prevLink = `${thisPage}?gitUser=${gitUser}&page=${previousPage}&qs=true`;
         }
 
         // Get the list of public repos for the specified user
@@ -228,8 +238,10 @@ function showOutput(result, howLong, nextPage, prevPage) {
         prevPageLink.href = prevPage;
         pagingDiv.appendChild(prevPageLink);
     } else {
-        const noLink = document.createElement('span');
-        pagingDiv.appendChild(noLink);
+        const noLinkSpan = document.createElement('span');
+        const noLinkText = document.createTextNode('<Previous');
+        noLinkSpan.appendChild(noLinkText);
+        pagingDiv.appendChild(noLinkSpan);
     }
 
     if (nextPage !== '') {
@@ -240,7 +252,9 @@ function showOutput(result, howLong, nextPage, prevPage) {
         nextPageLink.href = nextPage;
         pagingDiv.appendChild(nextPageLink);
     } else {
-        const noLink = document.createElement('span');
-        pagingDiv.appendChild(noLink);
+        const noLinkSpan = document.createElement('span');
+        const noLinkText = document.createTextNode('Next >');
+        noLinkSpan.appendChild(noLinkText);
+        pagingDiv.appendChild(noLinkSpan);
     }
 };

@@ -8,3 +8,5 @@ in a GitHub username, and the RegEx pattern is
 This application was developed as my final Capstone project for the Code: You Web Development pathway.
 
 ## Project Requirements
+There are several requirements which needed to be met for this project to obtain a passing grade. The following requrements have been met within this application.
+- Responsive Design

@@ -138,6 +138,9 @@ body {
 
 .searchButtons button:hover {
     border: 1px solid #8c8c8c;
+    color: #fff;
+    background-color: #ff8800;
+    ;
 }
 
 .resultTable {

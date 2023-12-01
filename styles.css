@@ -193,7 +193,7 @@ tr:nth-of-type(even) {
     font-weight: 500;
 }
 
-@media (max-width: 1024px) {
+@media only screen and (max-width: 992px) {
     .titleImage {
         height: 41.5px;
         width: 184px;

@@ -27,7 +27,7 @@ Of course, an alternative option is to simply visit the live demo I have linked 
 Once you have the app running, simply type a GitHub username in the search box.  If the name is invalid or is not found, an alert will be generated. Normally this would utilze a modal
 or some other appropriate form of alerting the user, but due to time constraints the app makes use of the built-in JavaScript 'alert()' function.
 
-On the search form there are two buttons. One submits the search term you specified in the input box. The other button chooses a random name from an array of pre-determined GitHub usernames and displays the public repositores. If there are more than 30 results, the results are paged. Paging links (if any) can be found at the bottom of the results table!
+On the search form there are two buttons. One submits the search term you specified in the input box. The other button chooses a random name from an array of pre-determined GitHub usernames and displays the public repositores. If there are more than 30 results, the results are paged. Paging links (if any) can be found at the bottom of the results table! If you wish to clear all search parameters and start a fresh search, you can click on the title image just above the search form.
 
 ## Testing
 While I have worked to explore as many edge cases as I could think of, it is possible that there are bugs and other issues that

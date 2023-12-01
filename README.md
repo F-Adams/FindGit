@@ -9,7 +9,7 @@ This application was developed as my final Capstone project for the Code: You We
 
 ## Project Requirements
 There are several requirements which needed to be met for this project to obtain a passing grade. The following requrements have been met within this application.
-- Responsive Design: The search buttons and image adjust to a smaller size when the viewport width falls below 996px.
+- Responsive Design: The search buttons and image adjust to a smaller size when the viewport width falls below 996px. This is accomplished using a Media Query.
 - Usage of Arrays/Objects: The call to the GitHub API returns a JSON array, and selected elements are then displayed in an HTML Table.
 - Usage of RegEx to validate user input: A regular expression is used to ensure that the user-supplied GitHub username conforms to current GitHub username restrictions
 - API Usage: This project utilizes the GitHub API to retrieve information about a specified username and any associated public repositories

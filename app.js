@@ -1,25 +1,3 @@
-// A fucntion to display an error to the user
-function displayError(errorCode) {
-    const outputDiv = document.getElementById('resultTable');
-    const errorDiv = document.createElement('div');
-    const errorText = document.createTextNode(`There was an error: ${errorCode}`);
-    const backButton = document.createElement('a');
-    const backText = document.createTextNode('Go Back');
-
-    errorDiv.classList.add('errorMessage');
-    errorDiv.appendChild(errorText);
-    outputDiv.appendChild(errorDiv);
-    backButton.classList.add('backButton');
-    backButton.appendChild(backText);
-    errorDiv.appendChild(backButton);
-
-    backButton.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        window.history.back();
-    });
-};
-
 function validName(gitName) {
     const pattern = /^[A-Za-z0-9-]+$/;
 

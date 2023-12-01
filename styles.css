@@ -199,11 +199,20 @@ tr:nth-of-type(even) {
         width: 184px;
     }
 
+    .searchBox input {
+        font-size: .95em;
+    }
+
     .searchButtons {
         flex-direction: column;
     }
 
-    .searchButtons button:last-child {
-        margin-top: 10px;
+    .searchButtons button {
+        padding: 5px 10px;
+        font-size: .95em;
+    }
+
+    #luckyButton {
+        visibility: hidden;
     }
 }

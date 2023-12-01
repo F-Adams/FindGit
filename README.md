@@ -22,8 +22,7 @@ If you wish to try out this project for yourself:
 
 You can also open the project files in VSCode and run them using the Live Server extension.
 
-Of course, an alternative option is to simply visit the live demo I have set up at the following URL:
-[findGit Live Demo](https://colony7.com/codeky/findGit/)
+Of course, an alternative option is to simply visit the live demo I have linked below.
 
 Once you have the app running, simply type a GitHub username in the search box.  If the name is invalid or is not found, an alert will be generated. Normally this would utilze a modal
 or some other appropriate form of alerting the user, but due to time constraints the app makes use of the built-in JavaScript 'alert()' function.
@@ -31,3 +30,6 @@ or some other appropriate form of alerting the user, but due to time constraints
 ## Testing
 While I have worked to explore as many edge cases as I could think of, it is possible that there are bugs and other issues that
 I might want to explore further in the future.  Fell free to test the app thourghly.  Suggestions and feedback is always welcome!
+
+## Live Demo
+You can find a live working demo of this project at the following URL[findGit Live Demo](https://colony7.com/codeky/findGit/)

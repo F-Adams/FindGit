@@ -34,4 +34,4 @@ While I have worked to explore as many edge cases as I could think of, it is pos
 I might want to explore further in the future.  Fell free to test the app thourghly.  Suggestions and feedback is always welcome!
 
 ## Live Demo
-You can find a live working demo of this project at the following URL[findGit Live Demo](https://colony7.com/codeky/findGit/)
+You can find a live working demo of this project at the following URL: [findGit Live Demo](https://colony7.com/codeky/findGit/)

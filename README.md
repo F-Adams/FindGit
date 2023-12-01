@@ -33,5 +33,8 @@ On the search form there are two buttons. One submits the search term you specif
 While I have worked to explore as many edge cases as I could think of, it is possible that there are bugs and other issues that
 I might want to explore further in the future.  Fell free to test the app thourghly.  Suggestions and feedback is always welcome!
 
+## Known Issues
+There are some issues that cropped up at the last minute within this application that I simply did not have time to address. The most obvious issue is the inability to press the ENTER key to submit the form.  Another issue is that after searching and clicking a NEXT or PREVIOUS page link, then clicking the "Random Username" will display the correct results, however the querystring from the previous search will still be displayed in the browsers address bar.
+
 ## Live Demo
 You can find a live working demo of this project at the following URL: [findGit Live Demo](https://colony7.com/codeky/findGit/)

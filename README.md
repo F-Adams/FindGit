@@ -20,9 +20,9 @@ If you wish to try out this project for yourself:
 - Navigate to the folder which conatins INDEX.HTML
 - Open the INDEX.HTML file in your browser (Right-click, then Open on Windows)
 
-You can also open the project files in VSCode and run them using the Liver Server extension.
+You can also open the project files in VSCode and run them using the Live Server extension.
 
-Once you have the app running, simply type a GitHub username in the search box.  If the name is invalid or is not found, an alert will be generated. Normally this would be a modal
+Once you have the app running, simply type a GitHub username in the search box.  If the name is invalid or is not found, an alert will be generated. Normally this would utilze a modal
 or some other appropriate form of alerting the user, but for now due to time constraints the app makes use of the built-in JavaScript 'alert()' funstion.
 
 An alternative option is to simply visit the live demo I have set up and the following URL:

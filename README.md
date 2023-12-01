@@ -30,4 +30,4 @@ An alternative option is to simply visit the live demo I have set up and the fol
 
 ## Testing
 I've tried to test the app as much as I can, attempting to explore as many edge cases as I could think of, however it is possible that there are bugs and other issues that
-I might want to explore further in the future.  Fell free to test 
+I might want to explore further in the future.  Fell free to test the app thourghly.  Suggestions and feedback is always welcome!

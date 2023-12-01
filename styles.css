@@ -192,3 +192,18 @@ tr:nth-of-type(even) {
     border-radius: 25px;
     font-weight: 500;
 }
+
+@media (max-width: 1024px) {
+    .titleImage {
+        height: 41.5px;
+        width: 184px;
+    }
+
+    .searchButtons {
+        flex-direction: column;
+    }
+
+    .searchButtons button:last-child {
+        margin-top: 10px;
+    }
+}

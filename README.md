@@ -34,7 +34,7 @@ While I have worked to explore as many edge cases as I could think of, it is pos
 I might want to look into in the future.  Feel free to test the app thourghly.  Suggestions and feedback is always welcome!
 
 ## Known Issues
-There are some issues that cropped up at the last minute within this application that I simply did not have time to address. The most obvious issue is the inability to press the ENTER key to submit the form.  Another issue is that after searching and clicking a NEXT or PREVIOUS page link, then clicking the "Random Username" button, the correct results will be displayed, however the querystring from the previous search will still be displayed in the browser's address bar.
+After searching and clicking a NEXT or PREVIOUS page link, then clicking the "Random Username" button, the correct results will be displayed, however the querystring from the previous search will still be displayed in the browser's address bar.
 
 ## Live Demo
 You can find a live working demo of this project at the following location: [findGit Live Demo](https://colony7.com/codeky/findGit/)

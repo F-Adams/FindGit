@@ -20,6 +20,12 @@ const luckyButton = document.getElementById('luckyButton');
 const searchForm = document.getElementById('searchForm');
 const inputField = document.getElementById('gitUser');
 
+// Set the copyright year to the current year
+const copySpan = document.getElementById('copyRight');
+const d = new Date();
+let year = d.getFullYear();
+copySpan.innerText += `${year} - FrankAdams.dev`;
+
 // Get information that is passed through the quesrysting, only if the form wasn't submitted
 let queryString = new URLSearchParams(document.location.search);
 let qs = queryString.get('qs');

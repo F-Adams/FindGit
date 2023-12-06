@@ -30,17 +30,25 @@ copySpan.innerText += `${year} - FrankAdams.dev`;
 let queryString = new URLSearchParams(document.location.search);
 let qs = queryString.get('qs');
 
+// If there is a querystring, get the page and username from it
 if (qs) {
-    currentPage = queryString.get('page');
+    let currentPage = queryString.get('page');
     gitUser = queryString.get('gitUser');
     qs = false;
+
+    // If a valid search term is supplied, get the requested data, otherwise alert the user
+    if (gitUser !== '' && validName(gitUser)) {
+        getData(gitUser, currentPage);
+    } else {
+        alert('Invalid Username or no username was specified.');
+    };
 };
 
 // Handle the submitted search form
 searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
     gitUser = inputField.value;
-    currentPage = 1;
+    let currentPage = 1;
 
     if (gitUser !== '' && validName(gitUser)) {
         getData(gitUser, currentPage);
@@ -59,21 +67,9 @@ luckyButton.addEventListener('click', function (e) {
     let randomNames = ['Amzn', 'Apple', 'AWS', 'Facebook', 'GitHub', 'Google', 'Microsoft', 'Twitter', 'YouTube'];
     let imFeelingLucky = Math.floor(Math.random() * randomNames.length);
     gitUser = randomNames[imFeelingLucky];
-    currentPage = 1;
+    let currentPage = 1;
     getData(gitUser, currentPage);
 });
-
-// If no page is specified, start at page 1
-if (currentPage === null) {
-    currentPage = 1;
-}
-
-// If a valid search term is supplied, get the requested data, otherwise alert the user
-if (gitUser !== '' && validName(gitUser)) {
-    getData(gitUser, currentPage);
-} else {
-    alert('Invalid Username or no username was specified.');
-};
 
 // This function perfomrs the actual API call
 async function getData(gitUser, currentPage) {

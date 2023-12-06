@@ -10,6 +10,16 @@ function validName(gitName) {
     }
 }
 
+// Set up some configuration options
+let perPage = 30;
+let thisPage = 'index.html';
+
+// Assign necessary elements to constants
+const searchButton = document.getElementById('searchButton');
+const luckyButton = document.getElementById('luckyButton');
+const searchForm = document.getElementById('searchForm');
+const inputField = document.getElementById('gitUser');
+
 // Get information that is passed through the quesrysting, only if the form wasn't submitted
 let queryString = new URLSearchParams(document.location.search);
 let qs = queryString.get('qs');
@@ -20,17 +30,9 @@ if (qs) {
     qs = false;
 };
 
-let perPage = 30;
-let thisPage = 'index.html';
-
-// Add event listeners to the form buttons
-const searchButton = document.getElementById('searchButton');
-const luckyButton = document.getElementById('luckyButton');
-
-searchButton.addEventListener('click', function (e) {
+// Handle the submitted search form
+searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    // Get the user-supplied search term from the input box
-    let inputField = document.getElementById('gitUser');
     gitUser = inputField.value;
     currentPage = 1;
 
@@ -43,6 +45,7 @@ searchButton.addEventListener('click', function (e) {
     inputField.value = '';
 });
 
+// Process the random search button
 luckyButton.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -59,12 +62,14 @@ if (currentPage === null) {
     currentPage = 1;
 }
 
+// If a valid search term is supplied, get the requested data, otherwise alert the user
 if (gitUser !== '' && validName(gitUser)) {
     getData(gitUser, currentPage);
 } else {
     alert('Invalid Username or no username was specified.');
 };
 
+// This function perfomrs the actual API call
 async function getData(gitUser, currentPage) {
     let start = Date.now();
 
@@ -111,7 +116,7 @@ async function getData(gitUser, currentPage) {
     };
 };
 
-//Build the output table
+//This funtion builds the output table
 function showOutput(result, howLong, nextPage, prevPage) {
 
     // Get the SECTION element, and clear it of any previously generated HTML

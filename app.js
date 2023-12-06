@@ -100,8 +100,8 @@ async function getData(gitUser, currentPage) {
         let nextLink = '';
         let prevLink = '';
 
-        firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
-        lastPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+        // firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+        // lastPage = `${thisPage}?gitUser=${gitUser}&page=${numPages}&qs=true`;
 
         if (currentPage < numPages) {
             let nextPage = currentPage + 1;

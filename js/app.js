@@ -87,34 +87,39 @@ async function getData(gitUser, currentPage) {
 
         let numRepos = pageQuery.public_repos;
 
-        // Calculate how many pages are needed to show all repos
-        const numPages = Math.ceil(numRepos / perPage);
+        if (numRepos > 0) {
+            // Calculate how many pages are needed to show all repos
+            const numPages = Math.ceil(numRepos / perPage);
 
-        // Build the paging links
-        currentPage = parseInt(currentPage);
-        let nextLink = '';
-        let prevLink = '';
+            // Build the paging links
+            currentPage = parseInt(currentPage);
+            let nextLink = '';
+            let prevLink = '';
 
-        firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
-        lastPage = `${thisPage}?gitUser=${gitUser}&page=${numPages}&qs=true`;
+            firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+            lastPage = `${thisPage}?gitUser=${gitUser}&page=${numPages}&qs=true`;
 
-        if (currentPage < numPages) {
-            let nextPage = currentPage + 1;
-            nextLink = `${thisPage}?gitUser=${gitUser}&page=${nextPage}&qs=true`;
-        }
-        if (currentPage > 1) {
-            let previousPage = currentPage - 1;
-            prevLink = `${thisPage}?gitUser=${gitUser}&page=${previousPage}&qs=true`;
-        }
+            if (currentPage < numPages) {
+                let nextPage = currentPage + 1;
+                nextLink = `${thisPage}?gitUser=${gitUser}&page=${nextPage}&qs=true`;
+            }
+            if (currentPage > 1) {
+                let previousPage = currentPage - 1;
+                prevLink = `${thisPage}?gitUser=${gitUser}&page=${previousPage}&qs=true`;
+            }
 
-        // Get the list of public repos for the specified user
-        const getRepos = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
-        const response = await fetch(getRepos);
-        const gitQuery = await response.json();
+            // Get the list of public repos for the specified user
+            const getRepos = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
+            const response = await fetch(getRepos);
+            const gitQuery = await response.json();
 
-        showOutput(gitQuery, nextLink, prevLink);
+            showOutput(gitQuery, nextLink, prevLink);
+        } else {
+            alert('That username has no public repositories.');
+        };
     };
 };
+
 
 //This funtion builds the output table
 function showOutput(result, nextPage, prevPage) {

@@ -251,5 +251,4 @@ function showOutput(result, nextPage, prevPage) {
         noLinkSpan.appendChild(noLinkText);
         pagingDiv.appendChild(noLinkSpan);
     };
-    console.log(resultSection);
 };

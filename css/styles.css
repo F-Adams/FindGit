@@ -1,37 +1,33 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-h1,
-thead,
-.bottom {
-    text-align: center;
-    font-weight: bold;
+    font-size: 18px;
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.pageHeader {
+.siteBrand {
+    width: 135px;
+    height: 28px;
+    margin: 5px;
+}
+
+.pageHeader,
+.pageFooter {
     background-color: #eee;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.pageHeader img {
-    width: 135px;
-    height: 28px;
-    margin: 5px;
-}
-
-.pageHeader a {
+.pageHeader a,
+.pageFooter a,
+.pagingDiv a {
     color: #3f51b5;
     text-transform: uppercase;
     padding: 10px;
@@ -39,63 +35,40 @@ body {
     text-decoration: none;
 }
 
-.pageHeader a:hover {
+.pageHeader a:hover,
+.pageFooter a:hover,
+.pagingDiv a:hover,
+.searchButtons button:hover {
     color: #fff;
     background-color: #3f51b5;
 }
 
-.pageFooter {
-    background-color: #eee;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: auto;
-    border-top: 1px solid #d0d0d0;
-}
-
-.pageFooter a {
+.copyright,
+.apiLink {
     color: #3f51b5;
     text-transform: uppercase;
-    padding: 15px;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.pageFooter a:hover {
-    color: #fff;
-    background-color: #3f51b5;
-}
-
-.siteBrand {
-    height: 48px;
-    border-radius: 50%;
-    margin: 5px;
-}
-
-.copyright {
-    color: #3f51b5;
-    text-transform: uppercase;
-    padding: 15px;
+    padding: 10px;
     font-weight: 700;
 }
 
 .pageMain {
     margin: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .searchForm {
-    width: 35vw;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .searchBox {
-    margin: 30px 0;
+    margin: 10px 0;
+    margin-bottom: 10px;
     width: 100%;
 }
 
@@ -104,10 +77,9 @@ body {
     width: 100%;
     border: 1px solid #d0d0d0;
     border-radius: 100px;
-    padding: 0 30px;
+    padding: 3px 10px;
     outline: 0;
     box-shadow: 0 0 0 0 rgba(136, 136, 136, 0);
-    font-size: 1.25em;
     transition: box-shadow .3s;
 }
 
@@ -115,58 +87,113 @@ body {
     box-shadow: 0 0 10px -4px #888888;
 }
 
-.searchButtons {
-    display: flex;
-    margin-bottom: 30px;
-    border-radius: 25px;
-}
-
 .searchButtons button {
-    margin-right: 15px;
+    margin-right: 3px;
     background-color: #ececec;
     color: #6f6f6f;
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 25px;
     border: 1px solid rgba(0, 0, 0, 0);
     font-size: 1em;
     font-weight: 500;
 }
 
-.searchButtons button:last-child {
-    margin-right: 0;
+.resultSection {
+    width: 75%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-.searchButtons button:hover {
-    border: 1px solid #8c8c8c;
-    color: #fff;
-    background-color: #ff8800;
-    ;
+.resultTitle {
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-.resultTable {
-    border-collapse: collapse;
-    width: 70vw;
+.searchResults {
+    width: 100%;
+    margin: .75em auto .25em;
 }
 
-th,
-td {
-    border: 1px solid #000;
-    padding: 5px 10px;
+.searchHeader {
+    background-color: #3f87a6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .5em .5em 0 0;
 }
 
-thead,
-tfoot {
+.searchHeader span {
+    padding: .4em;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.viewLink {
+    font-size: calc(1em - 25%);
+    padding: .5em;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+    display: none;
+}
+
+.repoURL:hover,
+.viewLink:hover {
+    text-decoration: underline;
+}
+
+.repoStars img {
+    height: 24px;
+    width: 24px;
+    margin-bottom: -4px;
+    margin-left: 6px;
+}
+
+.repoInfo {
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
+    border-bottom: 1px solid #8c8c8c;
+    min-height: 225px;
+}
+
+.repoDescription {
+    padding: .5em;
+    border-top: 1px solid #8c8c8c;
+}
+
+.repoURL {
+    padding: .5em;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.repoTags {
+    border-radius: 0 0 .5em .5em;
+    padding-bottom: .4em;
+    padding-right: .4em;
+    font-weight: 700;
+    text-align: right;
+    background-color: #eee;
+}
+
+.tag {
     background-color: #3f87a6;
     color: #fff;
-}
-
-tr:nth-of-type(even) {
-    background-color: #ddd;
-}
-
-.tableCaption {
-    font-weight: bold;
-    font-size: 1.5em;
+    margin-left: 5px;
+    padding: .1em .4em .3em .4em;
+    font-size: .75em;
+    font-weight: 700;
+    border-radius: .5em;
 }
 
 .result {
@@ -176,24 +203,54 @@ tr:nth-of-type(even) {
 }
 
 .pagingDiv {
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #d0d0d0;
-    border-radius: 25px;
     font-size: 1.2em;
-    font-weight: 500;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .pagingDiv a {
-    margin-right: 15px;
     color: #3f51b5;
-    border-radius: 25px;
-    font-weight: 500;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 700;
+    text-decoration: none;
 }
 
-@media only screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
+
+    .copyright,
+    .apiLink {
+        font-size: .9em;
+    }
+
+    .repoInfo {
+        border-bottom: none;
+        min-height: 125px;
+    }
+
+    .tag {
+        display: none;
+    }
+
+    .repoStars img {
+        height: 14px;
+        width: 14px;
+        margin-bottom: -2px;
+        margin-left: 3px;
+    }
+
+    .repoURL,
+    .resultTitle,
+    .searchHeader span {
+        font-size: calc(1em - 25%);
+    }
+
     .titleImage {
         height: 41.5px;
         width: 184px;
@@ -203,16 +260,33 @@ tr:nth-of-type(even) {
         font-size: .95em;
     }
 
-    .searchButtons {
-        flex-direction: column;
-    }
-
     .searchButtons button {
         padding: 5px 10px;
-        font-size: .95em;
+        font-size: .85em;
     }
 
     #luckyButton {
-        visibility: hidden;
+        display: none;
     }
 }
+
+@media screen and (max-width: 640px) {
+    .repoURL {
+        display: none;
+    }
+
+    .viewLink {
+        display: block;
+    }
+
+    .repoStars {
+        display: none;
+    }
+
+
+    .repoInfo {
+        border: none;
+    }
+}
+
+/* /////////////////////////////////// Table Styles //////////////////////////////////////////// */

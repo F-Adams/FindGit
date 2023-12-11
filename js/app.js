@@ -13,6 +13,7 @@ function validName(gitName) {
 // Set up some configuration options
 let perPage = 30;
 let thisPage = 'index.html';
+let genericDescription = 'No description has been given for this repository. View it on Guthub for additional information.';
 
 // Assign necessary elements to constants
 const searchButton = document.getElementById('searchButton');
@@ -73,8 +74,6 @@ luckyButton.addEventListener('click', function (e) {
 
 // This function perfomrs the actual API call
 async function getData(gitUser, currentPage) {
-    let start = Date.now();
-
     // Base URL for API call
     const baseURL = 'https://api.github.com/users';
 
@@ -97,7 +96,7 @@ async function getData(gitUser, currentPage) {
         let prevLink = '';
 
         firstPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
-        lastPage = `${thisPage}?gitUser=${gitUser}&page=1&qs=true`;
+        lastPage = `${thisPage}?gitUser=${gitUser}&page=${numPages}&qs=true`;
 
         if (currentPage < numPages) {
             let nextPage = currentPage + 1;
@@ -109,106 +108,118 @@ async function getData(gitUser, currentPage) {
         }
 
         // Get the list of public repos for the specified user
-        const searchResults = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
-        const response = await fetch(searchResults);
+        const getRepos = `${baseURL}/${gitUser}/repos?page=${currentPage}&per_page=${perPage}`;
+        const response = await fetch(getRepos);
         const gitQuery = await response.json();
-        let timeTaken = Date.now() - start;
 
-        showOutput(gitQuery, timeTaken, nextLink, prevLink);
+        showOutput(gitQuery, nextLink, prevLink);
     };
 };
 
 //This funtion builds the output table
-function showOutput(result, howLong, nextPage, prevPage) {
+function showOutput(result, nextPage, prevPage) {
 
     // Get the SECTION element, and clear it of any previously generated HTML
-    const resultSection = document.getElementById('resultTable');
+    const resultSection = document.getElementById('resultSection');
     resultSection.innerText = '';
 
-    // Create the table and add it to the result section
-    const tbl = document.createElement('table');
-    tbl.classList.add('resultTable');
-    resultSection.appendChild(tbl);
+    // Add a title caption to the result section
+    const resultTitle = document.createElement('span');
+    resultTitle.classList.add('resultTitle');
+    resultTitle.innerText = `Public Repositories for ${gitUser}`;
+    resultSection.appendChild(resultTitle);
 
-    // Add a caption to the table
-    const tblTitle = document.createElement('caption');
-    tblTitle.classList.add('tableCaption');
-    tblTitle.innerText = `Public Repositories for ${gitUser}`;
-    tbl.appendChild(tblTitle);
-
-    // Build the THEAD 
-    const tblHead = document.createElement('thead');
-    const tblHeadRow = document.createElement('tr');
-
-    let tblHeadCell = document.createElement('th');
-    tblHeadCell.innerText = 'Repository Name';
-    tblHeadRow.appendChild(tblHeadCell);
-
-    tblHeadCell = document.createElement('th');
-    tblHeadCell.innerText = 'Description';
-    tblHeadRow.appendChild(tblHeadCell);
-
-    tblHeadCell = document.createElement('th');
-    tblHeadCell.innerText = 'URL';
-    tblHeadRow.appendChild(tblHeadCell);
-    tblHead.appendChild(tblHeadRow);
-
-    // Append the THEAD to the table
-    tbl.appendChild(tblHead);
-
-    // Build the TBODY (where the search results are displayed)
-    const tblBody = document.createElement('tbody');
-
-    // Build and display the results
-    // Initialize a variable to count the repos
-    let numRepos = 0;
-
+    // Build and display the output
     for (let i in result) {
-        // If no description was given, add a note
+        // If no description was given for this repo, insert a generic one
         if (result[i].description === null) {
-            result[i].description = 'No description has been entered for this repository.';
+            result[i].description = genericDescription;
         }
 
+        // Each search result is an article element
+        const article = document.createElement('article');
+        article.classList.add('searchResults')
+        resultSection.appendChild(article);
+
+        // Build the article header
+        const repoHeader = document.createElement('header');
+        repoHeader.classList.add('searchHeader')
+
+        const repoName = document.createElement('span');
+        repoName.classList.add('repoName');
+        repoName.innerText = result[i].name;
+
+        const repoStars = document.createElement('span');
+        repoStars.classList.add('repoStars');
+        repoStars.innerText = result[i].stargazers_count;
+        const starImg = document.createElement('img');
+        starImg.src = 'img/star.png';
+        repoStars.append(starImg);
+
+        // Append the header elements to the article
+        repoHeader.appendChild(repoName);
+        repoHeader.appendChild(repoStars);
+        article.appendChild(repoHeader);
+
+        // Build the description section
+        const repoSection = document.createElement('section')
+        repoSection.classList.add('repoInfo');
+
         // Create the hyperlink for the repository URL
-        let htmlLink = document.createElement('a');
-        htmlLink.innerText = `${result[i].html_url}`;
-        htmlLink.target = '_blank';                             // Make it open in a new window/tab
-        htmlLink.href = `${result[i].html_url}`;
+        const repoURL = document.createElement('a');
+        repoURL.classList.add('repoURL');
+        repoURL.innerText = result[i].html_url;
+        repoURL.target = '_blank';
+        repoURL.href = result[i].html_url;
 
-        const tblBodyRow = document.createElement('tr');
-        let tblBodyCell = document.createElement('td');
-        tblBodyCell.innerText = `${result[i].name}`;
-        tblBodyRow.appendChild(tblBodyCell);
+        const viewLink = document.createElement('a');
+        viewLink.classList.add('viewLink');
+        viewLink.innerText = 'View on Github';
+        viewLink.href = result[i].html_url;
 
-        tblBodyCell = document.createElement('td');
-        tblBodyCell.innerText = `${result[i].description}`;
-        tblBodyRow.appendChild(tblBodyCell);
+        // Add the repo description
+        const repoDescription = document.createElement('span');
+        repoDescription.classList.add('repoDescription');
+        repoDescription.innerText = result[i].description;
 
-        tblBodyCell = document.createElement('td');
-        tblBodyCell.appendChild(htmlLink);
-        tblBodyRow.appendChild(tblBodyCell);
-        tblBody.appendChild(tblBodyRow);
+        // Append the new elements to the description section
+        repoSection.appendChild(repoURL);
+        repoSection.appendChild(viewLink);
+        repoSection.appendChild(repoDescription);
 
-        // Increment the repo counter
-        numRepos++;
-    }
-    // Append the TBODY to the table
-    tbl.appendChild(tblBody);
+        // Append the description section to the article
+        article.appendChild(repoSection);
 
-    // Build the TFOOT
-    const tblFooter = document.createElement('tfoot');
-    const tblFooterRow = document.createElement('tr');
-    const tblFooterCell = document.createElement('td');
+        // Build the article footer
+        const articleFooter = document.createElement('footer');
+        articleFooter.classList.add('repoTags')
 
-    tblFooterCell.classList.add('result');
-    tblFooterCell.colSpan = 3;
-    tblFooterCell.innerText = `Found ${numRepos} repositories in ${howLong / 1000} seconds`;
+        // Iterate through the list of tags, if any. If no tags exist, add "Github" as a lone tag
+        let tags = result[i].topics;
 
-    tblFooterRow.appendChild(tblFooterCell);
-    tblFooter.appendChild(tblFooterRow);
+        if (tags.length > 0) {
+            for (let topic in tags) {
+                const repoTag = document.createElement('span');
+                repoTag.classList.add('tag')
+                repoTag.innerText = tags[topic];
+                articleFooter.appendChild(repoTag);
+            }
+        };
 
-    // Append the TFOOT to the table
-    tbl.appendChild(tblFooter);
+        // Add the repo owner as a topic in the tag list if it doesn't already exist in the list
+        const tagIndex = tags.indexOf(result[i].owner.login);
+        const tagExists = tagIndex !== -1 ? true : false;
+
+        if (!tagExists) {
+            const repoTag = document.createElement('span');
+            repoTag.classList.add('tag')
+            repoTag.innerText = result[i].owner.login;
+            articleFooter.appendChild(repoTag);
+        }
+
+        // Append the article footer to the article
+        article.appendChild(articleFooter);
+    };
 
     // Write the paging links
     const pagingDiv = document.createElement('div');
@@ -219,7 +230,6 @@ function showOutput(result, howLong, nextPage, prevPage) {
         const prevPageLink = document.createElement('a');
         const hyperLink = document.createTextNode('< Previous');
         prevPageLink.appendChild(hyperLink);
-        prevPageLink.title = '< Previous';
         prevPageLink.href = prevPage;
         pagingDiv.appendChild(prevPageLink);
     } else {
@@ -233,7 +243,6 @@ function showOutput(result, howLong, nextPage, prevPage) {
         const nextPageLink = document.createElement('a');
         const hyperLink = document.createTextNode('Next >');
         nextPageLink.appendChild(hyperLink);
-        nextPageLink.title = 'Next >';
         nextPageLink.href = nextPage;
         pagingDiv.appendChild(nextPageLink);
     } else {
@@ -241,5 +250,6 @@ function showOutput(result, howLong, nextPage, prevPage) {
         const noLinkText = document.createTextNode('Next >');
         noLinkSpan.appendChild(noLinkText);
         pagingDiv.appendChild(noLinkSpan);
-    }
+    };
+    console.log(resultSection);
 };

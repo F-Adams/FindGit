@@ -203,7 +203,7 @@ body {
 }
 
 .pagingDiv {
-    width: 50%;
+    width: 75%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -247,7 +247,8 @@ body {
 
     .repoURL,
     .resultTitle,
-    .searchHeader span {
+    .searchHeader span,
+    .pagingDiv a {
         font-size: calc(1em - 25%);
     }
 
@@ -288,5 +289,3 @@ body {
         border: none;
     }
 }
-
-/* /////////////////////////////////// Table Styles //////////////////////////////////////////// */

@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
 }
 
 body {
@@ -73,7 +72,7 @@ body {
 }
 
 .searchBox input {
-    height: 50px;
+    height: 30px;
     width: 100%;
     border: 1px solid #d0d0d0;
     border-radius: 100px;
@@ -91,11 +90,10 @@ body {
     margin-right: 3px;
     background-color: #ececec;
     color: #6f6f6f;
-    padding: 10px 10px;
+    padding: 5px 10px;
     border-radius: 25px;
     border: 1px solid rgba(0, 0, 0, 0);
-    font-size: 1em;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .resultSection {
@@ -107,7 +105,6 @@ body {
 }
 
 .resultTitle {
-    font-size: 1em;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -129,13 +126,12 @@ body {
 .searchHeader span {
     padding: .4em;
     color: white;
-    font-size: 1em;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .viewLink {
-    font-size: calc(1em - 25%);
+    font-size: calc(1em - 15%);
     padding: .5em;
     font-weight: 700;
     color: #000;
@@ -224,11 +220,6 @@ body {
 
 @media screen and (max-width: 992px) {
 
-    .copyright,
-    .apiLink {
-        font-size: .9em;
-    }
-
     .repoInfo {
         border-bottom: none;
         min-height: 125px;
@@ -249,17 +240,21 @@ body {
     .repoDescription,
     .resultTitle,
     .searchHeader span,
-    .pagingDiv a {
-        font-size: calc(1em - 25%);
+    .searchBox input,
+    .pagingDiv,
+    .copyright,
+    .apiLink,
+    .gitLink {
+        font-size: calc(1em - 15%);
     }
 
     .titleImage {
-        height: 41.5px;
-        width: 184px;
+        height: 42px;
     }
 
     .searchBox input {
-        font-size: .95em;
+        height: 30px;
+        padding: 2px 5px;
     }
 
     .searchButtons button {
